@@ -17,9 +17,10 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: appknox/minio-gh-workflow
+          images: |
+            appknox/minio-gh-workflow
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=${{ github.ref_name }},enable={{is_default_branch}}
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@v6
